@@ -4,12 +4,27 @@
 // O proxy já barra quem não está logado, mas aqui conferimos DE
 // NOVO no servidor (defesa em profundidade). Se a API disser que
 // o token não vale, mandamos para o login.
+//
+// Por que o <Suspense>? Com Cache Components, ler cookies (a
+// sessão) fora de um <Suspense> quebra o build: a leitura só
+// acontece na hora da requisição e não entra no HTML estático.
 // =============================================================
+import { Suspense } from "react";
 import { redirect } from "next/navigation";
 import { getCurrentUser } from "@/lib/auth/session";
 import { AppHeader } from "@/components/layout/app-header";
 
-export default async function PrivateLayout({ children }) {
+export default function PrivateLayout({ children }) {
+  return (
+    <Suspense
+      fallback={<p className="p-8 text-center text-muted-foreground">Carregando...</p>}
+    >
+      <AuthenticatedShell>{children}</AuthenticatedShell>
+    </Suspense>
+  );
+}
+
+async function AuthenticatedShell({ children }) {
   const user = await getCurrentUser();
 
   if (!user) {

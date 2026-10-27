@@ -6,7 +6,11 @@
 //
 // Esta página é um SERVER Component. O formulário precisa de
 // interatividade (digitar, clicar), então ele é um CLIENT Component.
+//
+// Por que o <Suspense>? Com Cache Components, ler searchParams fora
+// de um <Suspense> quebra o build: a URL só existe na requisição.
 // =============================================================
+import { Suspense } from "react";
 import { LoginForm } from "@/components/auth/login-form";
 
 export const metadata = { title: "Entrar | Bootcamp" };
@@ -28,14 +32,20 @@ function getRedirectPath(from) {
   return from;
 }
 
-export default async function LoginPage({ searchParams }) {
+export default function LoginPage({ searchParams }) {
+  return (
+    <main className="flex flex-1 items-center justify-center px-4 py-10">
+      <Suspense>
+        <LoginFormWithRedirect searchParams={searchParams} />
+      </Suspense>
+    </main>
+  );
+}
+
+async function LoginFormWithRedirect({ searchParams }) {
   // searchParams = os parâmetros da URL (?from=...)
   const params = await searchParams;
   const redirectTo = getRedirectPath(params.from);
 
-  return (
-    <main className="flex flex-1 items-center justify-center px-4 py-10">
-      <LoginForm redirectTo={redirectTo} />
-    </main>
-  );
+  return <LoginForm redirectTo={redirectTo} />;
 }
