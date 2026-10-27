@@ -1,0 +1,26 @@
+// =============================================================
+// Mixins SCSS = "funções" que geram blocos de CSS reutilizáveis.
+// =============================================================
+@use "variables" as *;
+
+// Uso: @include md { ... }  -> aplica só em telas >= 768px
+@mixin md {
+  @media (min-width: $breakpoint-md) {
+    @content;
+  }
+}
+
+// Fundo com degradê da "marca"
+@mixin brand-gradient($angle: 135deg) {
+  background: linear-gradient($angle, $brand-from, $brand-to);
+}
+
+// Efeito de "levantar" ao passar o mouse
+@mixin hover-lift {
+  transition: transform $transition-fast, box-shadow $transition-fast;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.08);
+  }
+}

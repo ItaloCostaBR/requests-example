@@ -1,0 +1,31 @@
+@use "../../styles/variables" as *;
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding-left: $spacing-md;
+  border-left: 2px solid var(--border);
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+}
+
+.step {
+  position: relative;
+
+  // bolinha da linha do tempo
+  &::before {
+    content: "";
+    position: absolute;
+    left: calc(-#{$spacing-md} - 5px);
+    top: 0.35em;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--muted-foreground);
+  }
+
+  &.warning::before {
+    background: var(--destructive);
+  }
+}

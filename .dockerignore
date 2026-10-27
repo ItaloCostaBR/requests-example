@@ -1,0 +1,5 @@
+# Arquivos que NÃO são copiados para dentro da imagem
+node_modules
+.next
+.git
+.env

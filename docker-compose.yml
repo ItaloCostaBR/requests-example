@@ -1,0 +1,21 @@
+# =============================================================
+# Docker Compose = jeito fácil de subir o container com
+# todas as configurações, sem decorar comandos enormes.
+#
+#   Subir:     docker compose up --build
+#   Derrubar:  docker compose down
+# =============================================================
+services:
+  web:
+    build: . # monta a imagem usando o Dockerfile desta pasta
+    container_name: bootcamp-web
+    ports:
+      - "3000:3000" # porta_do_seu_computador:porta_do_container
+    env_file:
+      - .env # carrega as variáveis de ambiente do arquivo .env
+    environment:
+      - WATCHPACK_POLLING=true # faz o hot reload funcionar no Mac/Windows
+    volumes:
+      - .:/app # espelha seu código para dentro do container (hot reload)
+      - /app/node_modules # mas usa o node_modules instalado NO container
+      - /app/.next # e a pasta de build do container

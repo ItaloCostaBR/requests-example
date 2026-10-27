@@ -1,0 +1,39 @@
+// CSS Module em SCSS: as classes aqui só valem para a página inicial.
+// O Next gera nomes únicos (ex: page_hero__x7Yz2), então não há conflito.
+@use "../styles/variables" as *;
+@use "../styles/mixins" as *;
+
+.hero {
+  @include brand-gradient;
+  color: white;
+  padding: $spacing-xl $spacing-lg;
+  border-radius: $radius;
+
+  @include md {
+    padding: $spacing-xl * 1.5;
+  }
+
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+  }
+
+  p {
+    margin-top: $spacing-sm;
+    opacity: 0.9;
+  }
+}
+
+.routes {
+  display: grid;
+  gap: $spacing-md;
+
+  @include md {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.routeCard {
+  @include hover-lift;
+}

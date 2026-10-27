@@ -1,0 +1,22 @@
+// =============================================================
+// Variáveis SCSS
+// Use com:  @use "../../styles/variables" as *;
+// Dica: as CORES do tema vêm do shadcn (CSS variables em globals.css).
+// Aqui ficam coisas que o Sass ajuda a organizar: espaçamentos,
+// breakpoints, durações de animação...
+// =============================================================
+
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+$spacing-xl: 2.5rem;
+
+$radius: 0.75rem;
+
+$breakpoint-md: 768px;
+
+$transition-fast: 150ms ease;
+
+// Cores de destaque usadas só nos estilos SCSS
+$brand-from: #6366f1; // indigo
+$brand-to: #06b6d4; // cyan

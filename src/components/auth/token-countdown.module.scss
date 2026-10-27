@@ -1,0 +1,40 @@
+@use "../../styles/variables" as *;
+@use "../../styles/mixins" as *;
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: $spacing-sm;
+  padding: $spacing-md;
+  border: 1px solid var(--border); // cor vem do tema do shadcn
+  border-radius: $radius;
+}
+
+.row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+}
+
+.track {
+  height: 8px;
+  border-radius: 999px;
+  background: var(--muted);
+  overflow: hidden;
+}
+
+.bar {
+  @include brand-gradient(90deg);
+  height: 100%;
+  transition: width 1s linear;
+
+  // modificador: barra vermelha quando o token venceu
+  &.expired {
+    background: var(--destructive);
+  }
+}
+
+.hint {
+  font-size: 0.8rem;
+  color: var(--muted-foreground);
+}
